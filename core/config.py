@@ -9,6 +9,13 @@ class Settings(BaseSettings):
     LANDING_PROD_DATABASE: str
     LANDING_PROD_UID: str
     LANDING_PROD_PWD: str
+
+    LANDING_QA_DRIVER: str
+    LANDING_QA_SERVER: str
+    LANDING_QA_DATABASE: str
+    LANDING_QA_UID: str
+    LANDING_QA_PWD: str
+
     RMX_QA_DRIVER: str
     RMX_QA_SERVER: str
     RMX_QA_DATABASE: str

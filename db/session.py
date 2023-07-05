@@ -17,10 +17,10 @@ PYODBC_STRING = (
 )
 
 
-def create_db_connection(
+def create_engine_from_connection_name(
     connection_name: str,
     pool=True
-) -> Tuple[Session, float]:
+):
     """
     :connection_name: Connection name, it must match with the upper
                       case of environment variables, for example: RMS
@@ -45,5 +45,14 @@ def create_db_connection(
         engine = create_engine(
             f"mssql+pyodbc:///?odbc_connect={quoted_conn_str}", pool=None
         )
+    return engine
+    
+
+
+def create_db_connection(
+    connection_name: str,
+    pool=True
+) -> Tuple[Session, float]:
+    engine = create_engine_from_connection_name(connection_name, pool)
     session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-    return session(), 
+    return session()
