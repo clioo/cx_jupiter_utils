@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, UniqueConstraint, Index, CHAR
-from sqlalchemy.sql import text
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.sql import text, func
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 
@@ -15,8 +15,8 @@ class GroupTbl(Base):
     GroupDesc = Column(String(100))
     CountryId = Column(Integer, ForeignKey('CountryCat.CountryId'))
     ApplicationId = Column(Integer, ForeignKey('ApplicationCat.ApplicationId'))
-    DateCreate = Column(DateTime, server_default=text("(getutcdate())"), nullable=False)
-    DateUpdate = Column(DateTime, server_default=text("(getutcdate())"), nullable=False)
+    DateCreate = Column(DateTime, server_default=func.now(), nullable=False)
+    DateUpdate = Column(DateTime, server_default=func.now(), nullable=False)
 
 
 class SubGroupTbl(Base):
@@ -30,8 +30,8 @@ class SubGroupTbl(Base):
     GroupId = Column(Integer, ForeignKey('GroupTbl.GroupId'))
     SubGroupCode = Column(String(4))
     SubGroupDesc = Column(String(100))
-    DateCreate = Column(DateTime, server_default=text("(getutcdate())"), nullable=False)
-    DateUpdate = Column(DateTime, server_default=text("(getutcdate())"), nullable=False)
+    DateCreate = Column(DateTime, server_default=func.now(), nullable=False)
+    DateUpdate = Column(DateTime, server_default=func.now(), nullable=False)
 
 class CountryCat(Base):
     __tablename__ = 'CountryCat'
